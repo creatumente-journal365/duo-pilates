@@ -1,0 +1,15 @@
+{
+  "logo-01.png": { "bg": "#ffffff", "art": "#000000" },
+  "logo-02.png": { "bg": "#ffffff", "art": "#fff6ee" },
+  "logo-03.png": { "bg": "#ffffff", "art": "#9c9d71" },
+  "logo-04.png": { "bg": "#ffffff", "art": "#60693e" },
+  "logo-05.png": { "bg": "#60693e", "art": "#fff6ee" },
+  "logo-06.png": { "bg": "#9c9d71", "art": "#fff6ee" },
+  "logo-07.png": { "bg": "#9c9d71", "art": "#60693e" },
+  "logo-08.png": { "bg": "#60693e", "art": "#9c9d71" },
+  "logo-09.png": { "bg": "#ffffff", "art": "#000000" },
+  "logo-10.png": { "bg": "#ffffff", "art": "#fff6ee" },
+  "logo-11.png": { "bg": "#ffffff", "art": "#9c9d71" },
+  "logo-12.png": { "bg": "#ffffff", "art": "#60693e" },
+  "logo-13.png": { "bg": "#60693e", "art": "#fff6ee" }
+}

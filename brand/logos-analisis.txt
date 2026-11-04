@@ -1,0 +1,13 @@
+logo-01.png n=17 top: #ffffff=95.6% #000000=4.2% #bfbfbf=0.0% #3f3f3f=0.0% | flats(2): #ffffff=95.56% #000000=4.21%
+logo-02.png n=17 top: #ffffff=95.6% #fff6ee=4.2% #fffdfb=0.1% #fff8f2=0.0% | flats(3): #ffffff=95.56% #fff6ee=4.20% #fffdfb=0.06%
+logo-03.png n=17 top: #ffffff=95.6% #9c9d71=4.2% #e6e6db=0.0% #cdceb8=0.0% | flats(2): #ffffff=95.59% #9c9d71=4.21%
+logo-04.png n=17 top: #ffffff=95.6% #60693e=4.2% #afb49e=0.0% #d7d9cf=0.0% | flats(2): #ffffff=95.58% #60693e=4.22%
+logo-05.png n=17 top: #60693e=95.6% #fff6ee=4.2% #888c6a=0.0% #d8d3c3=0.0% | flats(2): #60693e=95.58% #fff6ee=4.21%
+logo-06.png n=17 top: #9c9d71=95.6% #fff6ee=4.2% #b5b390=0.0% #e7e0cf=0.0% | flats(2): #9c9d71=95.58% #fff6ee=4.21%
+logo-07.png n=17 top: #9c9d71=95.6% #60693e=4.2% #6f764b=0.0% #8d9064=0.0% | flats(2): #9c9d71=95.55% #60693e=4.21%
+logo-08.png n=17 top: #60693e=95.6% #9c9d71=4.2% #8d9064=0.0% #6f764b=0.0% | flats(2): #60693e=95.56% #9c9d71=4.20%
+logo-09.png n=17 top: #ffffff=96.7% #000000=3.2% #0f0f0f=0.0% #bfbfbf=0.0% | flats(2): #ffffff=96.67% #000000=3.25%
+logo-10.png n=17 top: #ffffff=96.7% #fff6ee=3.3% #fffefe=0.0% #fffdfb=0.0% | flats(2): #ffffff=96.67% #fff6ee=3.25%
+logo-11.png n=17 top: #ffffff=96.7% #9c9d71=3.3% #f9f9f6=0.0% #e6e6db=0.0% | flats(2): #ffffff=96.66% #9c9d71=3.25%
+logo-12.png n=17 top: #ffffff=96.7% #60693e=3.3% #d7d9cf=0.0% #c3c7b6=0.0% | flats(2): #ffffff=96.66% #60693e=3.25%
+logo-13.png n=17 top: #60693e=96.7% #fff6ee=3.2% #888c6a=0.0% #d8d3c3=0.0% | flats(2): #60693e=96.66% #fff6ee=3.24%
