@@ -1,3 +1,4 @@
+import netlify from "@netlify/vite-plugin-tanstack-start";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
@@ -36,5 +37,11 @@ export default defineConfig({
     }),
     tanstackStart(),
     viteReact(),
+    // Netlify adapter, loaded ONLY when the build actually runs on Netlify
+    // (`NETLIFY=true` is a read-only variable Netlify sets in every build).
+    // Gating it keeps this file's build output byte-identical on the platform's
+    // own host (publish.sh → dist/server/server.js + dist/client, served by
+    // serve.ts) while Netlify gets its functions bundle. See netlify.toml.
+    ...(process.env.NETLIFY ? [netlify()] : []),
   ],
 });

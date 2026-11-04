@@ -58,6 +58,49 @@ bun run optimize:images   # regenerate the WebP variants + og.jpg
 
 Stack: TanStack Start (React + Vite + Tailwind CSS v4), TypeScript, `sharp` for images.
 
+## Deploying to Netlify (free tier)
+
+The site deploys to Netlify with **Netlify's official TanStack Start Vite plugin** —
+the method Netlify documents for TanStack Start ≥ 1.132.0
+([docs](https://docs.netlify.com/build/frameworks/framework-setup-guides/tanstack-start/)).
+No Nitro preset, no `target: "netlify"`, no `app.config.ts`: those are the older paths
+(≤ 1.131.x) and would need a different publish directory (`dist`).
+
+What's in the repo:
+
+- `netlify.toml` — build command, publish directory, Node version and cache headers.
+- `package.json` → devDependency `@netlify/vite-plugin-tanstack-start`.
+- `vite.config.ts` — the plugin, loaded **only when `NETLIFY=true`** (a read-only
+  variable Netlify sets in every build). The platform's own hosting keeps building the
+  same `dist/client` + `dist/server/server.js` that `serve.ts` serves, untouched.
+
+### Values for the Netlify UI
+
+Project configuration → Build & deploy → Build settings:
+
+| Setting | Value |
+| --- | --- |
+| Base directory | *(empty — repo root)* |
+| Build command | `bun install && bun run build` |
+| Publish directory | `dist/client` |
+| Functions directory | *(empty — the plugin emits the functions bundle)* |
+| Environment variables | **none required** |
+
+They are already in `netlify.toml`, so importing the repository is enough; the table is
+only for a manual/UI setup. Netlify needs Node ≥ 22.12 (pinned via
+`[build.environment] NODE_VERSION`); Bun is preinstalled on Netlify's build image and is
+used because the repo ships `bun.lock`.
+
+### Verifying a Netlify build locally
+
+```bash
+bun install
+NETLIFY=true bun run build   # writes .netlify/v1/functions/server.mjs + dist/client
+```
+
+Without `NETLIFY=true` the build is the plain platform build (`bun run build`), which is
+what `bun run publish` uses.
+
 ## Images
 
 Heavy originals live in `src/assets/raw/` (never imported, never bundled). The WebP

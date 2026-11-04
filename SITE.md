@@ -32,8 +32,8 @@ nombres y volver a correr el script: falla si algún archivo supera su presupues
 
 How this site is served and how changes go live **depends on the team's setup**:
 your system prompt's **Website** section is the authority — follow it, not this
-file. The `package.json` scripts (`publish`, `go-live`) exist for setups whose
-Website section tells you to run them; don't run them otherwise. Server logs live
+file. The `package.json` script (`publish`) exists for setups whose
+Website section tells you to run it; don't run it otherwise. Server logs live
 in `.run/`.
 
 ## Making it dynamic
@@ -72,13 +72,16 @@ database rather than writing to files:
 
 1. Call `discover_tools` for a database (e.g. "serverless Postgres with a free
    tier"). The owner connects it (Neon) from the card, which provides `DATABASE_URL`.
-2. Query it from server-only code with the built-in helper — never from the client:
+2. This site has no database and ships no DB helper (`src/db.ts` was removed with the
+   `@neondatabase/serverless` dependency). If you ever need one, re-add the dependency
+   and query it from server-only code — never from the client:
 
    ```tsx
    import { createServerFn } from "@tanstack/react-start";
-   import { sql } from "~/db";
+   import { neon } from "@neondatabase/serverless";
 
    const getPosts = createServerFn().handler(async () => {
+     const sql = neon(process.env.DATABASE_URL!);
      const rows = await sql()`select id, title, created_at from posts`;
      // Coerce non-primitive columns before returning — timestamps come back as JS
      // Dates, which React will not render:
@@ -89,6 +92,5 @@ database rather than writing to files:
 `DATABASE_URL` is in your environment automatically once connected, and it reaches the
 published site too — saving or changing it restarts the live site with the new value
 within seconds, no republish needed. The same code works in the preview and in
-production. (On external hosting via `bun run go-live`, re-run it after connecting so
-that host picks up `DATABASE_URL`.) One database serves both the preview and the live
-site.
+production. (On Netlify, add `DATABASE_URL` under Site configuration → Environment
+variables.) One database serves both the preview and the live site.
