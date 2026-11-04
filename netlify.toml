@@ -1,0 +1,49 @@
+# Netlify deployment config — Duo Pilates Studio website (TanStack Start 1.158 + Vite 7).
+#
+# METHOD (official, checked 2026-11 against
+# https://docs.netlify.com/build/frameworks/framework-setup-guides/tanstack-start/):
+# from TanStack Start 1.132.0 on, Netlify supports it through its own Vite plugin,
+# `@netlify/vite-plugin-tanstack-start` (devDependency in package.json), added to
+# the plugin list in vite.config.ts. No Nitro preset and no `target: "netlify"`
+# option: those are the paths for versions older than 1.132.0 (publish dir would
+# then be `dist`, not `dist/client`).
+#
+# The plugin is gated in vite.config.ts behind `process.env.NETLIFY` — Netlify sets
+# NETLIFY=true (read-only) in every build — so the platform's own build
+# (`bun run publish` → publish.sh → vite build) keeps producing exactly what
+# serve.ts expects (dist/server/server.js + dist/client) and nothing changes there.
+#
+# VALUES TO ENTER IN THE NETLIFY UI
+# (Project configuration → Build & deploy → Build settings):
+#   Base directory:        (empty — the repo root is the project root)
+#   Build command:         bun install && bun run build
+#   Publish directory:     dist/client
+#   Functions directory:   (empty — the plugin emits the functions bundle itself)
+#   Environment variables: none required
+#
+# The same values are already declared below, so importing the repo is enough;
+# the UI list is only needed if the config file is ever ignored.
+
+[build]
+  # `bun install` is explicit because the repo ships bun.lock (not bun.lockb) and
+  # because the Netlify plugin needs its own dependency present at build time.
+  command = "bun install && bun run build"
+  # Static assets + the SSR function's client bundle, per the TanStack Start guide.
+  publish = "dist/client"
+
+[build.environment]
+  # @netlify/vite-plugin-tanstack-start requires Node ^22.12.0 || >=24.0.0.
+  # Pin it so the build never lands on an older image default.
+  NODE_VERSION = "22"
+
+# `netlify dev` (optional, for testing the Netlify runtime locally): serve the
+# normal Vite dev server on 3000 with platform emulation in front of it.
+[dev]
+  command = "bun run dev"
+  targetPort = 3000
+
+# Vite fingerprints every file under /assets, so they can be cached forever.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
